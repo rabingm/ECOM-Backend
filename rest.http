@@ -1,2 +1,12 @@
 ###get access
 GET http://localhost:6000
+
+
+###login api endpoint
+POST http://localhost:6000/api/v1/login
+ Content-Type: application/json
+
+ {
+     "email":"nvi",
+      "password":"cnsdkh489"
+ }
