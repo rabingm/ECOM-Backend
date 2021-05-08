@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 const app = express();
 import cors from "cors";
@@ -13,6 +16,11 @@ app.use(express.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(express.json());
+
+//Database Connection
+import mongoClient from "./db/db.js";
+mongoClient()
+
 
 //Load routers
 import router from "./routers/login.router.js";
@@ -47,3 +55,4 @@ app.listen(PORT, (error) => {
 
   console.log(`Server is running at http://localhost:${PORT}`);
 });
+
