@@ -7,6 +7,6 @@ POST http://localhost:6000/api/v1/login
  Content-Type: application/json
 
  {
-     "email":"nvi",
-      "password":"cnsdkh489"
+     "email":"something@gmail.com",
+      "password":"426376826"
  }
