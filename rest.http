@@ -10,3 +10,6 @@ POST http://localhost:6000/api/v1/login
      "email":"something@gmail.com",
       "password":"426376826"
  }
+
+ //Create User api endpoint
+ 
