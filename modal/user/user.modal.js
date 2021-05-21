@@ -1,9 +1,9 @@
-import { ClientUsers } from "./user.schema.js";
+import { ClientUsers } from "./User.schema.js";
 
-export const createUser = (fObj) => {
+export const createUser = (userObj) => {
   return new Promise((resolve, reject) => {
     try {
-      ClientUsers(fObj)
+      ClientUsers(userObj)
         .save()
         .then((data) => resolve(data))
         .catch((error) => reject(error));
@@ -13,10 +13,10 @@ export const createUser = (fObj) => {
   });
 };
 
-export const loginUser = ({ email, password }) => {
+export const loginUser = (email) => {
   return new Promise((resolve, reject) => {
     try {
-      ClientUsers.findOne({ email, password })
+      ClientUsers.findOne({ email })
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     } catch (error) {

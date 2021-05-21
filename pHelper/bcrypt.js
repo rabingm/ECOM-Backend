@@ -5,7 +5,7 @@ const saltRound = 10;
 export const hashPassword = (plainPassword)=>{
 return new Promise((resolve, reject) =>{
     try {
-        resolve (bcrypt.hashSync(myPlaintextPassword, saltRound));
+        resolve (bcrypt.hashSync(plainPassword, saltRound));
 
     } catch (error) {
         reject(error)
@@ -16,7 +16,7 @@ return new Promise((resolve, reject) =>{
 export const comparePassword = (plainPassword, hashedPasswordFromDB)=>{
 return new Promise((resolve, reject)=>{
     try {
-        bcrypt.compare(plainPassword, hashedPasswordFromDB, function(err, result) {
+        bcrypt.compare(plainPassword, hashedPasswordFromDB, function(error, result) {
             if(error)resolve(error)
             resolve(result)
         })

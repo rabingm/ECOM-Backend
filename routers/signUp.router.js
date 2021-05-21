@@ -15,10 +15,10 @@ router.all("*", (req, res, next) => {
   next();
 });
 
-router.put("/", newUserValidation, async (req, res) => {
+router.post("/", newUserValidation, async (req, res) => {
   try {
   
-
+console.log(req.body, "FROM SERVER")
     const { password } = req.body;
 
     const hashPass = await hashPassword(password);
@@ -71,45 +71,6 @@ router.put("/", newUserValidation, async (req, res) => {
     });
   }
 });
-router.post("/", loginValidation, async (req, res) => {
-  try {
-    //loginUser(user)
-    const { email, password } = req.body;
-    const result = await loginUser(email);
 
-    console.log(req.body, result)
-    if (!result?._id) {
-      return res.json({
-        status: "error",
-        message: "Invalid login details",
-      });
-    }
-
-    const dbHash = result.password;
-
-    const user = await comparePassword(password, dbHash);
-
-    if (!user) {
-      return res.json({
-        status: "error",
-        message: "Invalid login",
-      });
-    }
-
-   result.password = undefined
-
-    res.json({
-      status: "success",
-      message: "login success",
-      result,
-    });
-  } catch (error) {
-    throw new Error(error.message);
-  }
-});
-
-// router.post("/", (req, res))
-
-// router.post("/", (req, res))
 
 export default router;

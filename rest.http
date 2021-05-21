@@ -1,15 +1,24 @@
 ###get access
 GET http://localhost:6000/
 
-
 ###login api endpoint
 POST http://localhost:6000/api/v1/login
  Content-Type: application/json
 
  {
-     "email":"something@gmail.com",
+     "email":"somethin@gmail.com",
       "password":"426376826"
  }
 
- //Create User api endpoint
- 
+###//Create User api endpoint
+PUT http://localhost:6000/api/v1/
+ Content-Type: application/json
+
+ {
+     "fname":"Rabin",
+     "lname":"Ghimire",
+     "phone":"0453389",
+     "role":"user",
+     "email":"somethhiiin@gmail.com",
+      "password":"426376826"
+ }

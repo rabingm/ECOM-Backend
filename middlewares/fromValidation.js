@@ -4,10 +4,11 @@ const shortStr = Joi.string().min(3)
 const longStr = Joi.string().min(2000)
 const email = Joi.string().min(3).max(50).required();
 const phone = Joi.number().min(7)
-const password = Joi.string().max(50).required();
+const password = Joi.string().max(100).required();
 
 
 export const newUserValidation = (req, res, next) => {
+  console.log(req.body, "from validation" )
   const schema = Joi.object({  
     fname: shortStr.required(), lname: shortStr.required(), email, password, role: shortStr, phone });
 
