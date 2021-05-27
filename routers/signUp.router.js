@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  loginValidation,
+  
   newUserValidation,
 } from "../middlewares/fromValidation.js";
 

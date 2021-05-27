@@ -6,7 +6,7 @@ const app = express();
 import cors from "cors";
 import morgan from "morgan";
 
-const PORT = process.env.PORT || 8002;
+const PORT = process.env.PORT || 8001;
 
 app.use(cors());
 app.use(morgan("tiny"));
@@ -25,11 +25,16 @@ mongoClient()
 //Load routers
 import loginRouter from "./routers/login.router.js";
 import signupRouter from "./routers/signUp.router.js";
+import  categoryRouter  from "./routers/category.router.js";
+import productRouter from "./routers/product.router.js";
+import cartRouter  from "./routers/cart.router.js";
 
 
 //Use APIS
 app.use("/api/v1/login", loginRouter);
 app.use("/api/v1/signup", signupRouter);
+app.use("/api/v1/categories", categoryRouter)
+app.use("/api/v1/products", productRouter)
 
 app.get("/", function (req, res) {
   res.send("hello world");
