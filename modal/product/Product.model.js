@@ -3,7 +3,7 @@ import ProdSchema from "./Product.schema.js";
 export const getProducts = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await ProdSchema.find();
+      const result = await ProdSchema.find({featured: true});
 
       resolve(result);
     } catch (error) {

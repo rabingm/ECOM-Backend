@@ -34,7 +34,7 @@ import cartRouter  from "./routers/cart.router.js";
 app.use("/api/v1/login", loginRouter);
 app.use("/api/v1/signup", signupRouter);
 app.use("/api/v1/categories", categoryRouter)
-app.use("/api/v1/products", productRouter)
+app.use("/api/v1/product", productRouter)
 
 app.get("/", function (req, res) {
   res.send("hello world");

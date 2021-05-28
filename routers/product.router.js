@@ -30,6 +30,8 @@ router.post("/feature", async (req, res) => {
 
   router.get("/:_id", async (req, res) => {
     try {
+
+     
       const { _id } = req.params;
       const result = _id ? await getProductById(_id) : await getProducts();
 
@@ -62,6 +64,28 @@ router.post("/feature", async (req, res) => {
       res.json({
         status: "Success",
         message: "Product Slug fetching success",
+        result,
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({
+        status: "Success",
+        message: error.message,
+      });
+    }
+  });
+  router.get("/products/viewmore", async (req, res) => {
+    try {
+
+    
+     
+      const result = await getProducts()
+
+      console.log("Fetching viewmore From product router", result);
+
+      res.json({
+        status: "Success",
+        message: "View More Products fetching success",
         result,
       });
     } catch (error) {
