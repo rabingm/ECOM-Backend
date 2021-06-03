@@ -5,79 +5,22 @@ import {
 } from "../middlewares/fromValidation.js";
 
 import { createUser, loginUser } from "../modal/user/User.modal.js";
-
-import { hashPassword, comparePassword } from "../pHelper/bcrypt.js";
+import { hashPassword, comparePassword } from "../Helpers/bcrypt.js";
+import { createaccessJWT, createrefreshJWT } from "../Helpers/jwthelper.js";
 
 const router = express.Router();
-
 
 router.all("*", (req, res, next) => {
   next();
 });
 
-router.put("/", newUserValidation, async (req, res) => {
-  try {
-  
-
-    const { password } = req.body;
-
-    const hashPass = await hashPassword(password);
-
-    console.log(hashPass);
-    const newUser = {
-      ...req.body,
-      password: hashPass,
-    };
-
-    const result = await createUser(newUser);
-
-    if (result?._id) {
-      return res.json({
-        status: "success",
-        message: "User account created successfully",
-        result,
-      });
-    }
-    res.json({
-      status: "error",
-      message: "Invalid operation, please try again.",
-    });
-  } catch (error) {
-    console.log(error.message);
-    if (
-      error.message.includes(
-        "duplicate key error collection: ecommerce.clientusers index: _email"
-      )
-    ) {
-      return res.json({
-        status: "error",
-        message: "Email already exits.",
-      });
-    }
-    if (
-      error.message.includes(
-        "duplicate key error collection: ecommerce.clientusers index: _phone"
-      )
-    ) {
-      return res.json({
-        status: "error",
-        message: "Phone number already exits.",
-      });
-    }
-
-    res.json({
-      status: "error",
-      message: "Unable to create the account",
-    });
-  }
-});
 router.post("/", loginValidation, async (req, res) => {
   try {
     //loginUser(user)
     const { email, password } = req.body;
     const result = await loginUser(email);
 
-    console.log(req.body, result)
+    console.log(req.body, result);
     if (!result?._id) {
       return res.json({
         status: "error",
@@ -96,12 +39,20 @@ router.post("/", loginValidation, async (req, res) => {
       });
     }
 
-   result.password = undefined
+    result.password = undefined;
+
+    //  //create accessJWT
+    const accessJWT = await createaccessJWT(result.email, result._id);
+
+    //  //create refreshJWT
+    const refreshJWT = await createrefreshJWT(result.email, result._id);
 
     res.json({
       status: "success",
       message: "login success",
       result,
+      accessJWT,
+      refreshJWT,
     });
   } catch (error) {
     throw new Error(error.message);

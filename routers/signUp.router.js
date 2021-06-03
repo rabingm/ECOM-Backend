@@ -6,10 +6,9 @@ import {
 
 import { createUser, loginUser } from "../modal/user/User.modal.js";
 
-import { hashPassword, comparePassword } from "../pHelper/bcrypt.js";
+import { hashPassword, comparePassword } from "../helpers/bcrypt.js";
 
 const router = express.Router();
-
 
 router.all("*", (req, res, next) => {
   next();
@@ -17,12 +16,9 @@ router.all("*", (req, res, next) => {
 
 router.post("/", newUserValidation, async (req, res) => {
   try {
-  
-console.log(req.body, "FROM SERVER")
+console.log("got hit")
     const { password } = req.body;
-
     const hashPass = await hashPassword(password);
-
     console.log(hashPass);
     const newUser = {
       ...req.body,
@@ -30,17 +26,18 @@ console.log(req.body, "FROM SERVER")
     };
 
     const result = await createUser(newUser);
+    console.log("from signup", result)
 
     if (result?._id) {
       return res.json({
         status: "success",
         message: "User account created successfully",
-        result,
+        result
       });
     }
     res.json({
       status: "error",
-      message: "Invalid operation, please try again.",
+      message: "Invalid operation, please try again."
     });
   } catch (error) {
     console.log(error.message);
@@ -51,7 +48,7 @@ console.log(req.body, "FROM SERVER")
     ) {
       return res.json({
         status: "error",
-        message: "Email already exits.",
+        message: "Email already exits."
       });
     }
     if (
@@ -61,16 +58,15 @@ console.log(req.body, "FROM SERVER")
     ) {
       return res.json({
         status: "error",
-        message: "Phone number already exits.",
+        message: "Phone number already exits."
       });
     }
 
     res.json({
       status: "error",
-      message: "Unable to create the account",
+      message: "Unable to create the account"
     });
   }
 });
-
 
 export default router;

@@ -28,6 +28,7 @@ import signupRouter from "./routers/signUp.router.js";
 import  categoryRouter  from "./routers/category.router.js";
 import productRouter from "./routers/product.router.js";
 import cartRouter  from "./routers/cart.router.js";
+import paymentRouter  from "./routers/payment.router.js";
 
 
 //Use APIS
@@ -35,6 +36,8 @@ app.use("/api/v1/login", loginRouter);
 app.use("/api/v1/signup", signupRouter);
 app.use("/api/v1/categories", categoryRouter)
 app.use("/api/v1/product", productRouter)
+app.use("/api/v1/payment", paymentRouter)
+
 
 app.get("/", function (req, res) {
   res.send("hello world");
