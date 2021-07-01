@@ -7,7 +7,7 @@ const phone = Joi.number().min(7);
 const password = Joi.string().max(100).required();
 
 export const newUserValidation = (req, res, next) => {
-  console.log("from validation");
+  
   
   try {
     const schema = Joi.object({

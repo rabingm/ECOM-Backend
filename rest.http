@@ -7,12 +7,16 @@ POST http://localhost:8001/api/v1/login
 Content-Type: application/json
 
  {
-     "email":"biksdahal@gmail.com",
-      "password":"bikash123"
+     "email":"fullel@gmail.com",
+      "password":"123123"
  }
+###user api
+GET http://localhost:8001/api/v1/user/60be0dd8a63be5064abca9a0
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGxlbEBnbWFpbC5jb20iLCJpYXQiOjE2MjMxMTg1MjMsImV4cCI6MTYyMzExOTQyM30.uedbj6ytc9kUFfkkBtOFRo9GZ4srthlH2HMWQa8lSj8
+
 
 ###//Create User api endpoint
-POST http://localhost:8001/api/v1/signup
+GET http://localhost:8001/api/v1/signup
 Content-Type: application/json
 
  {
@@ -20,18 +24,22 @@ Content-Type: application/json
      "lname":"Ghimire",
      "phone":"0453389",
      "role":"user",
-     "email":"somethhiiin@gmail.com",
-      "password":"426376826"
+     "email":"fullel@gmail.com",
+      "password":"123123"
  }
 
 
- ###get category
-GET http://localhost:6000/api/v1/category
+ ####
+GET http://localhost:6000/api/v1/categories/6074f0636e2ba6061cbb49e9
 Content-Type: application/json
 
 
-###get product by slug
-GET http://localhost:8001/api/v1/product/products/viewmore
+###get category
+GET http://localhost:8001/api/v1/category/categories
+Content-Type: application/json
+
+###get category by id
+GET http://localhost:8001/api/v1/category/6074f0636e2ba6061cbb49e9
 Content-Type: application/json
 
 
@@ -43,3 +51,37 @@ Content-Type: application/json
 POST  http://localhost:8001/api/v1/payment
 Content-Type: application/json
 
+###token api endendpoint
+GET http://localhost:8001/api/v1/token
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGxlbEBnbWFpbC5jb20iLCJpYXQiOjE2MjMxMzE4MjUsImV4cCI6MTYyNTcyMzgyNX0.w_1ZQfWh6ixkbVQELGJ06u6Ul2wRTUfwtgmStikWFCw
+
+###//Order endpoint
+POST http://localhost:8001/api/v1/checkout
+Content-Type: application/json
+
+ {
+     "name":"Chicken",
+     "price":"12",
+     "salePrice":"13",
+     "qty":"5",
+     "thumbNail":"",
+      "images":"",
+      "categories":""
+      
+       }
+
+       order={
+           userName: "",
+           usrId: "",
+           shippintadd: "sfdsf",
+           item: [
+               {
+                   "itemId": "",
+                   name:"",
+                   price: "",
+                   orderQtuy: "",
+                   unit: ""
+                   thumbnail: ""
+               }
+           ]
+       }

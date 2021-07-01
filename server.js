@@ -25,18 +25,25 @@ mongoClient()
 //Load routers
 import loginRouter from "./routers/login.router.js";
 import signupRouter from "./routers/signUp.router.js";
-import  categoryRouter  from "./routers/category.router.js";
+import categoryRouter  from "./routers/category.router.js";
 import productRouter from "./routers/product.router.js";
-import cartRouter  from "./routers/cart.router.js";
+import userRouter  from "./routers/user.router.js";
+import {userAuthorization}  from "./middlewares/authoMiddleware.js";
 import paymentRouter  from "./routers/payment.router.js";
+import tokenRouter from "./routers/token.router.js";
+import orderRouter from "./routers/order.router.js";
 
 
 //Use APIS
 app.use("/api/v1/login", loginRouter);
+app.use("/api/v1/user",userAuthorization, userRouter);
+app.use("/api/v1/token", tokenRouter);
+
 app.use("/api/v1/signup", signupRouter);
-app.use("/api/v1/categories", categoryRouter)
+app.use("/api/v1/category", categoryRouter)
 app.use("/api/v1/product", productRouter)
 app.use("/api/v1/payment", paymentRouter)
+app.use("/api/v1/checkout", orderRouter)
 
 
 app.get("/", function (req, res) {

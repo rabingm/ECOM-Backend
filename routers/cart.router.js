@@ -9,13 +9,13 @@ router.all("*", (req, res, next)=>{
     console.log("GOT HIT")
 })
 
-router.get("/cart",async (req, res)=>{
+router.get("/",async (req, res)=>{
     try {
         const result = await getCart()
 
         res.json({
             status : "success",
-            message : "Category fetching success",
+            message : "Cart fetching success",
             result,
         
         })

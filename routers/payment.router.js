@@ -1,17 +1,9 @@
 import express from "express";
-import {
-  loginValidation,
-  newUserValidation,
-} from "../middlewares/fromValidation.js";
-
 import { v4 as uuidv4 } from 'uuid';
-
 import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_PRIVATEKEY);
 
-import { createUser, loginUser } from "../modal/user/User.modal.js";
+const stripe = new Stripe("sk_test_51IwH65JgvGU90BXJ3vgIQ9fwA1kqd2TgjvdESjODzjJuBvp6pDBCtGZrNngcu5mIifaGauFIBQRRodVYbFMKGIij00AbIn5svY");
 
-import { hashPassword, comparePassword } from "../helpers/bcrypt.js";
 
 const router = express.Router();
 
@@ -20,27 +12,30 @@ router.all("*", (req, res, next) => {
 });
 
 router.post("/", (req, res) => {
-  const { token, product } = req.body;
+  const { token, selectedProd, subTotal } = req.body;
+
+  console.log("from product router", subTotal);
+
   ////
-  const idempotency_key = uuidv4()
+  const idempotencyKey = uuidv4()
+
   return stripe.customers
     .create({ email: token.email, source: token.id })
-    .then(customer =>{
-      stripe.charges.create({
+    .then(customer => {
+      return stripe.charges.create({
         customer: customer.id,
-        amount: product.total,
-        currency:"aud",
-        description:"New order payment",
-        receipt_email:token.email
+        amount: subTotal*100, 
+        // /selectedProd.total,
+        currency: "aud",
+        description: "New order payment",
+        receipt_email: token.email
       })
-    },{
-      idempotency_key
-    }).then(result =>{
-      console.log(result)
-
+    }, {
+      idempotencyKey
+    }).then(result => {
       res.send({
-        status:"success",
-        message:"Payment is taken",
+        status: "success",
+        message: "Payment is taken",
         result
       })
     })
@@ -51,14 +46,6 @@ router.post("/", (req, res) => {
         message: "Error, we're unable to take the payment to the moment",
       });
     });
-
-  ////
-
-  res.send({
-    status: "success",
-    message: "Payment received",
-  });
-  console.log("TYhis is payment");
 });
 
 export default router;

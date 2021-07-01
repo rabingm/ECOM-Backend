@@ -12,3 +12,15 @@ export const storeAccessJWT =  (newAccessObj) => {
     })
   
 };
+export const getAccessJwtByToken = async (accessJWT) => {
+    return new Promise(async(resolve, reject)=>{
+        try {
+            const result = await SesSchema.findOne({accessJWT})
+            resolve(result);
+          } catch (error) {
+              reject(error)
+            // console.log(error);
+          }
+    })
+  
+};

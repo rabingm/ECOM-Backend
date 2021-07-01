@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const SessionSchema = mongoose.Schema(
   {
-    accessJwt: {
+    accessJWT: {
       type: String,
       require: true,
       default: "",

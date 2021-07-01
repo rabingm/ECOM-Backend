@@ -35,6 +35,18 @@ const userSchema = new mongoose.Schema({
     require: true,
     default: "",
   },
+  refreshJWT: {
+    token:{
+      type: String,
+      require: true,
+      default: ""
+    },
+    addedAT:{
+      type: Date,
+      require:true,
+      default: Date.now(),
+    }
+  },
 });
 
 export const ClientUsers = mongoose.model("ClientUsers", userSchema);

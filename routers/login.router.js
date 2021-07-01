@@ -4,9 +4,9 @@ import {
   newUserValidation,
 } from "../middlewares/fromValidation.js";
 
-import { createUser, loginUser } from "../modal/user/User.modal.js";
+import { createUser, loginUser, getUserById } from "../modal/user/User.modal.js";
 import { hashPassword, comparePassword } from "../Helpers/bcrypt.js";
-import { createaccessJWT, createrefreshJWT } from "../Helpers/jwthelper.js";
+import { createaccessJWT, createrefreshJWT, verifyAccessJwt } from "../Helpers/jwthelper.js";
 
 const router = express.Router();
 
@@ -59,7 +59,36 @@ router.post("/", loginValidation, async (req, res) => {
   }
 });
 
-// router.post("/", (req, res))
+router.get("/:_id", async(req, res)=>{
+try {
+  const {_id} = req.params
+if(!_id){
+  res.send({
+    status:"error",
+    message: "Invalid request", 
+  })
+}
+const user = await getUserById(_id)
+
+if(user) user.password = undefined;
+
+user._id ?
+res.send({
+  status:"success",
+  message: "Login successful",
+  user
+})
+:
+res.send({
+  status:"error",
+  message: "Invalid request",
+})
+
+} catch (error) {
+  throw new Error(error.message)
+}
+
+})
 
 // router.post("/", (req, res))
 
