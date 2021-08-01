@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  
+
   newUserValidation,
 } from "../middlewares/fromValidation.js";
 
@@ -16,17 +16,14 @@ router.all("*", (req, res, next) => {
 
 router.post("/", newUserValidation, async (req, res) => {
   try {
-console.log("got hit")
     const { password } = req.body;
     const hashPass = await hashPassword(password);
-    console.log(hashPass);
     const newUser = {
       ...req.body,
       password: hashPass,
     };
 
     const result = await createUser(newUser);
-    console.log("from signup", result)
 
     if (result?._id) {
       return res.json({

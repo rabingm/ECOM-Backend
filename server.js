@@ -32,12 +32,14 @@ import {userAuthorization}  from "./middlewares/authoMiddleware.js";
 import paymentRouter  from "./routers/payment.router.js";
 import tokenRouter from "./routers/token.router.js";
 import orderRouter from "./routers/order.router.js";
+import contactRouter from "./routers/contactus.router.js";
 
 
 //Use APIS
 app.use("/api/v1/login", loginRouter);
 app.use("/api/v1/user",userAuthorization, userRouter);
 app.use("/api/v1/token", tokenRouter);
+app.use("/api/v1/contactus", contactRouter);
 
 app.use("/api/v1/signup", signupRouter);
 app.use("/api/v1/category", categoryRouter)

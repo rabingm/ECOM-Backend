@@ -4,7 +4,6 @@ import Stripe from "stripe";
 
 const stripe = new Stripe("sk_test_51IwH65JgvGU90BXJ3vgIQ9fwA1kqd2TgjvdESjODzjJuBvp6pDBCtGZrNngcu5mIifaGauFIBQRRodVYbFMKGIij00AbIn5svY");
 
-
 const router = express.Router();
 
 router.all("*", (req, res, next) => {

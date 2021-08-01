@@ -48,7 +48,7 @@ GET  http://localhost:8001/api/v1/products/60aafb8fa34bc8047123c51b
 Content-Type: application/json
 
 ###get payment
-POST  http://localhost:8001/api/v1/payment
+POST  http://localhost:8001/api/v1/contactus
 Content-Type: application/json
 
 ###token api endendpoint
